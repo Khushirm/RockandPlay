@@ -30,7 +30,6 @@ const CurrentSong: React.FC<CurrentSongProps> = ({ song }) => {
   });
 
   const handlePlay = () => {
-    console.log(isPlaying);
     if (!isPlaying) {
       play();
     } else {

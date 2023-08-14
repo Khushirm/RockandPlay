@@ -13,6 +13,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { FcGoogle } from "react-icons/fc";
 
+
 const Signin = () => {
   const session = useSession();
   const router = useRouter();
@@ -30,7 +31,7 @@ const Signin = () => {
     if (session.data) {
       router.replace("/");
     }
-  }, [session]);
+  }, [session,router]);
 
   const login = useCallback(async () => {
     setIsLoading(true);
@@ -46,9 +47,8 @@ const Signin = () => {
     } catch (error) {
       toast.error("Some error occured. Please try again later!");
       setIsLoading(false);
-      console.log(error);
     }
-  }, [user]);
+  }, [user,router]);
 
   return (
     <div className="h-full w-full overflow-hidden relative bg-[url('/images/music.webp')] bg-cover bg-fixed bg-no-repeat">
@@ -91,7 +91,7 @@ const Signin = () => {
               </div>
             </div>
             <p className="text-neutral-600 mt-4">
-              Don't have an account?
+              Don&apos;t have an account?
               <Link
                 href="/signup"
                 className="text-white ml-1 hover:underline cursor-pointer"

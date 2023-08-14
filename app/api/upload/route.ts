@@ -2,9 +2,10 @@ import { NextRequest, NextResponse } from "next/server";
 import prismadb from "@/lib/prismadb";
 
 export const POST = async (req: NextRequest) => {
+  let success=false;
   try {
     const { title, author, imageurl, songurl } = await req.json();
-    const song = await prismadb.song.create({
+    await prismadb.song.create({
       data: {
         title,
         author,
@@ -12,9 +13,9 @@ export const POST = async (req: NextRequest) => {
         songurl,
       },
     });
-    NextResponse.json({ message: "Song uploaded successfully", song });
+    success=true;
+    NextResponse.json({ success,message: "Song uploaded successfully" });
   } catch (error) {
-    console.log(error);
-    NextResponse.json({ error: "An error occurred" });
+    NextResponse.json({ success,error: "Some error occured. Please try again later!" });
   }
 };

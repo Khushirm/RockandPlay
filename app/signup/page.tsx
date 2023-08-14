@@ -47,7 +47,6 @@ const SignUp = () => {
     } catch (error) {
       toast.error("Some error occured. Please try again later!");
       setIsLoading(false);
-      console.log(error);
     }
   };
   return (

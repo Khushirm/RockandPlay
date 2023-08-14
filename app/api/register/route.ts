@@ -30,7 +30,6 @@ export async function POST(req: NextRequest) {
       message: "Account created successfully",
     });
   } catch (error) {
-    console.log(error);
     return NextResponse.json({
       success,
       error: "Some error occured. Please try again later!",

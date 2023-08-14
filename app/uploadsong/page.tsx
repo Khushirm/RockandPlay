@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { useUploadThing } from "@/lib/uploadthing";
 import { toast } from "react-hot-toast";
+import Image from 'next/image';
 
 const UploadSong = () => {
   const { startUpload } = useUploadThing("songAndImage");
@@ -33,7 +34,6 @@ const UploadSong = () => {
     try {
       const imgUpload = await startUpload(imageFile);
       const songUpload = await startUpload(songFile);
-      console.log(imageFile, songFile);
       const imagePath = imgUpload?.[0].url;
       const songPath = songUpload?.[0].url;
       const response = await fetch("/api/upload", {
@@ -49,12 +49,13 @@ const UploadSong = () => {
         }),
       });
       const data = await response.json();
-      toast.success("Song uploaded successfully");
-      setIsLoading(false);
-      console.log(data);
-
-      console.log(imgUpload, songUpload);
-      console.log(song);
+      if(data.success){
+        setIsLoading(false);
+        toast.success(data.message);
+      }else{
+        setIsLoading(false)
+        toast.error(data.error)
+      }
     } catch (error) {
       toast.error("Some error occured. Please try again later!");
       setIsLoading(false);
@@ -62,19 +63,20 @@ const UploadSong = () => {
       throw new Error("Some error occured");
     }
   };
-
   return (
     <>
-      <div className="flex  bg-blue-600 h-full items-center justify-center">
+      <div className="flex bg-blue-600 h-full items-center justify-center flex-wrap">
         <div className="flex flex-col items-center">
-          <img
+          <Image
             src="/images/enjoyy.webp"
             alt="Image"
-            className="object-cover mt-4"
+            className="object-cover mt-4 w-auto h-auto"
+            width={400}
+            height={400}
           />
         </div>
-        <div className="flex-shrink-0 w-2/4 p-4">
-          <h2 className="text-2xl text-white font-semibold mb-4 mt-3">
+        <div>
+          <h2 className="text-2xl text-center text-white font-semibold mb-4 mt-3">
             Upload a Song
           </h2>
           <form className="bg-blue-600 rounded-lg p-6" onSubmit={handleSubmit}>
