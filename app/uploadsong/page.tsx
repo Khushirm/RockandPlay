@@ -49,18 +49,12 @@ const UploadSong = () => {
         }),
       });
       const data = await response.json();
-      if(data.success){
-        setIsLoading(false);
-        toast.success(data.message);
-      }else{
-        setIsLoading(false)
-        toast.error(data.error)
-      }
+      setIsLoading(false);
+      toast.success("Song uploaded successfully");
     } catch (error) {
       toast.error("Some error occured. Please try again later!");
       setIsLoading(false);
       console.error(error);
-      throw new Error("Some error occured");
     }
   };
   return (

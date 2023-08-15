@@ -4,7 +4,7 @@ import prismadb from "@/lib/prismadb";
 export const POST = async (req: NextRequest) => {
   let success=false;
   try {
-    const { title, author, imageurl, songurl } = await req.json();
+    const { title, author, imageurl, songurl } = await req.json()
     await prismadb.song.create({
       data: {
         title,

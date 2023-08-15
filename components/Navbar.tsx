@@ -1,11 +1,15 @@
 "use client";
 import Link from "next/link";
-import React from "react";
+import React,{useEffect} from "react";
 import { useSession, signOut } from "next-auth/react";
 import Image from 'next/image'
 
 const Navbar = () => {
   const session = useSession();
+
+  useEffect(()=>{
+
+  },[])
   return (
     <nav className="flex justify-around items-center bg-gray-800 p-2">
       <Image src="/images/logo.webp" alt="logo" width={90} height={90} />

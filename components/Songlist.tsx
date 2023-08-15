@@ -5,6 +5,8 @@ import SongItem from "./SongItem";
 import CurrentSong from "./CurrentSong";
 import { toast } from "react-hot-toast";
 
+export const revalidate=0;
+
 const SongList = () => {
   const [songs, setSongs] = useState<Song[]>([]);
   const [currentSong, setCurrentSong] = useState<Song | null>(null);
