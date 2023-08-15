@@ -3,8 +3,10 @@ import { useState } from "react";
 import { useUploadThing } from "@/lib/uploadthing";
 import { toast } from "react-hot-toast";
 import Image from 'next/image';
+import {useRouter} from 'next/navigation';
 
 const UploadSong = () => {
+  const router=useRouter();
   const { startUpload } = useUploadThing("songAndImage");
 
   const [song, setSong] = useState({ title: "", author: "" });
@@ -47,15 +49,15 @@ const UploadSong = () => {
           imageurl: imagePath,
           songurl: songPath,
         }),
+        cache:'no-cache'
       });
       const data = await response.json();
       setIsLoading(false);
-      toast.success("Song uploaded successfully");
     } catch (error) {
-      toast.error("Some error occured. Please try again later!");
       setIsLoading(false);
-      console.error(error);
     }
+    toast.success("Song uploaded successfully");
+    router.push('/')
   };
   return (
     <>
