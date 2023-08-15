@@ -9,6 +9,7 @@ export const revalidate = 0;
 export const dynamic = 'force-dynamic';
 
 const SongList = () => {
+  const { signal } = new AbortController()
   const [songs, setSongs] = useState<Song[]>([]);
   const [currentSong, setCurrentSong] = useState<Song | null>(null);
 
@@ -16,7 +17,9 @@ const SongList = () => {
     async function fetchSongs() {
       try {
         const response = await fetch("/api/getSongs",{
-          cache:'no-store'
+          cache:'no-store',
+          signal,
+          next: { revalidate: 0 }
         });
         const data = await response.json();
         if (data.success) {
