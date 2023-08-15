@@ -5,7 +5,8 @@ import SongItem from "./SongItem";
 import CurrentSong from "./CurrentSong";
 import { toast } from "react-hot-toast";
 
-export const revalidate=0;
+export const revalidate = 0;
+export const dynamic = 'force-dynamic';
 
 const SongList = () => {
   const [songs, setSongs] = useState<Song[]>([]);
@@ -14,7 +15,9 @@ const SongList = () => {
   useEffect(() => {
     async function fetchSongs() {
       try {
-        const response = await fetch("/api/getSongs");
+        const response = await fetch("/api/getSongs",{
+          cache:'no-store'
+        });
         const data = await response.json();
         if (data.success) {
           setSongs(data.songs);

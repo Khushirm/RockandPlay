@@ -48,8 +48,7 @@ const UploadSong = () => {
           author: song.author,
           imageurl: imagePath,
           songurl: songPath,
-        }),
-        cache:'no-cache'
+        })
       });
       const data = await response.json();
       setIsLoading(false);
